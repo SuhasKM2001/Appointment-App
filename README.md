@@ -1,2 +1,2 @@
-# Conventia-App
-An app for assisting Alzheimer patient
+# Appointment-App
+An app which is helpful to schedule appointment and manage other person availability
