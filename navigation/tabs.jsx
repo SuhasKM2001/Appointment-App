@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import ConversationTab from '../screens/ConversationTab';
+import AppointmentsTab from '../screens/AppointmentsTab';
 import UserPage from '../screens/UserPage';
 import UserProfileTab from '../screens/UserProfileTab';
 import {StyleSheet, Text, View, Image,} from 'react-native';
@@ -43,13 +43,11 @@ const Tabs = () => {
               </Text>
             </View>
           ),
-          headerShown: true,
-          headerStyle: {
-            backgroundColor: '#fcc100',
-            //borderBottomLeftRadius:80,
-            //borderBottomRightRadius:80,
-            height: 80,
-          },
+          // headerShown: true,
+          // headerStyle: {
+          //   backgroundColor: '#fcc100',
+          //   height: 80,
+          // },
           headerTintColor: '#ffffff',
           headerTitle: 'Nbyula',
           headerTitleStyle: {
@@ -64,8 +62,8 @@ const Tabs = () => {
         }}
       />
       <Tab.Screen
-        name="Conversation"
-        component={ConversationTab}
+        name="AppointmentsTab"
+        component={AppointmentsTab}
         options={{
           tabBarIcon: ({focused}) => (
             <View
