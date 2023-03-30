@@ -1,16 +1,27 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import ImportantTab from './ImportantTab';
-import HomeUserScreen from './HomeUserScreen';
-
+import {View, Text, StyleSheet} from 'react-native';
 function UserPage() {
-  const Stack = createStackNavigator();
   return (
-    <Stack.Navigator screenOptions={{header: () => null}}>
-      <Stack.Screen name="HomeScreen" component={HomeUserScreen}/>
-      <Stack.Screen name="ImportantTab" component={ImportantTab} />
-    </Stack.Navigator>
+    <View style={styles.container}>
+      <Text style={styles.text}>Welcome to home screen</Text>
+    </View>
   );
 }
 
 export default UserPage;
+
+const styles = StyleSheet.create({
+  text: {
+    color: 'black',
+    fontSize: 18,
+    lineHeight: 27,
+    marginTop: 23,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+})

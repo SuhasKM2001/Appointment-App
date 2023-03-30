@@ -45,16 +45,22 @@ const Tabs = () => {
           ),
           headerShown: true,
           headerStyle: {
-            backgroundColor: '#51087E',
-            height:80,
+            backgroundColor: '#fcc100',
+            //borderBottomLeftRadius:80,
+            //borderBottomRightRadius:80,
+            height: 80,
           },
           headerTintColor: '#ffffff',
-          headerTitle: 'Conventia',
+          headerTitle: 'Nbyula',
           headerTitleStyle: {
             fontSize: 27, 
             fontFamily: "serif",
             fontWeight: "bold",
+            alignContent:'center',
+            //alignSelf:'center',
+            textAlign:'center',
           },
+          
         }}
       />
       <Tab.Screen

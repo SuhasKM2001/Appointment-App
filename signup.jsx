@@ -23,7 +23,6 @@ function SignupPage({navigation}) {
   // const navigation = useNavigation();
   const [userdetail, setuserdetail] = useState({
     email: '',
-    password: '',
     name: '',
   });
 
@@ -33,9 +32,6 @@ function SignupPage({navigation}) {
         setDoc(doc(db, 'Users', userCredential.user.uid), {
           Email: userdetail.email,
           Name: userdetail.name,
-          UserImage:'',
-          Address:'',
-          Caregiverno:'',
         });
         alert('User created successfully');
         navigation.navigate('userloginpage');
@@ -43,7 +39,7 @@ function SignupPage({navigation}) {
       .catch(error => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        alert(errorMessage);
+        // alert(errorMessage);
       });
   };
   return (
@@ -82,9 +78,7 @@ function SignupPage({navigation}) {
             secureTextEntry={true}
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={text =>
-              setuserdetail({...userdetail, password: text})
-            }
+            onChangeText={text => setuserdetail({...userdetail, password: text})}
             Icon={AntDesign}
             Icontype={'lock'}
           />
@@ -93,9 +87,7 @@ function SignupPage({navigation}) {
             secureTextEntry={true}
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={text =>
-              setuserdetail({...userdetail, password: text})
-            }
+            onChangeText={text => setuserdetail({...userdetail, password: text})}
             Icon={AntDesign}
             Icontype={'lock'}
           />

@@ -120,7 +120,6 @@ function LoginPage({navigation}) {
           contentContainerStyle={{alignItems: 'center'}}
           showsVerticalScrollIndicator={false}>
           <View style={styles.appcontainer}>
-            {/* <Text style={styles.appname}>Conventia</Text> */}
             <Image
               source={require('./Loginimage.jpg')}
               style={styles.loginimage}

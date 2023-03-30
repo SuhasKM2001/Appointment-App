@@ -12,7 +12,6 @@ const firebaseConfig = {
   messagingSenderId: "313097173790",
   appId: "1:313097173790:web:a05ca7b61270c626b8a70f",
   measurementId: "G-R1SN1971HG",
-  databaseURL: "https://conventia-application-default-rtdb.firebaseio.com",
 };
 
 // Initialize Firebase
