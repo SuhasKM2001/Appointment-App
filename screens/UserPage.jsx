@@ -9,19 +9,46 @@ import {
   TextInput,
   ToastAndroid,
   ActivityIndicator,
+  TouchableOpacity,
 } from 'react-native';
 import Emoji from 'react-native-emoji';
 import CustomButton from '../CustomButton';
 import {useSelector} from 'react-redux';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 function UserPage() {
   // const {user} = useSelector(state => state.useReducer);
   const [guest, setGuest] = useState('');
   const [title, setTitle] = useState('');
   const [agenda, setAgenda] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date());
   const [time, setTime] = useState('');
   const [showloader, setShowloader] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true)
+  }
+
+  // const hideDatePicker = () => {
+  //   setDatePickerVisibility(false);
+  // }
+
+  const handleConfirm= value =>{
+    setDate(date);
+    hideDatePicker();
+  }
+
+  const onChangefunc = (event, selectedDate) => {
+    setDatePickerVisibility(false)
+
+    // on cancel set date value to previous date
+    if (event?.type === 'dismissed') {
+        setDate(date);
+        return;
+    }
+    setDate(selectedDate);
+};
 
   const senddata = async () => {
     setShowloader(true)
@@ -79,15 +106,30 @@ function UserPage() {
           }}
           value={agenda}
         />
+
+        <TouchableOpacity onPress={showDatePicker}>
         <TextInput
+          numberOfLines={1}
+          editable={false}
           style={styles.textstyle}
           placeholder={'Date of Appointment'}
           placeholderTextColor={'black'}
-          onChangeText={text => {
-            setDate(text);
-          }}
+          // onChangeText={text => {
+          //   setDate(text);
+          // }}
           value={date}
         />
+        { isDatePickerVisible && (<DateTimePicker 
+        mode='date'
+        is24Hour={true}
+        display="default"
+        value={date}
+        onChange={onChangefunc}
+        />)
+        }
+        {console.log(date)}
+
+        </TouchableOpacity>
         <TextInput
           style={styles.textstyle}
           placeholder={'Time of Appointment'}
