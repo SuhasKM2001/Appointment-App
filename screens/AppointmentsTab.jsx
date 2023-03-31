@@ -46,9 +46,9 @@ function AppointmentsTab({navigation}) {
             <Text style={styles.relativedetails2}>{cards.Agenda}</Text>
             <View style={styles.scheduledetails}>
               <Icon name="clock-o" size={20}/>
-              <Text style={styles.icontextdesign}>6:00pm</Text>
+              <Text style={styles.icontextdesign}>{cards.Time}</Text>
               <Icon name="calendar" size={20}/>
-              <Text style={styles.icontextdesign}>22/03/2023</Text>
+              <Text style={styles.icontextdesign}>{cards.Datefield}</Text>
             </View>
             </View>
           </View>

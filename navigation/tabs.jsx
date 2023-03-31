@@ -34,11 +34,11 @@ const Tabs = () => {
                 style={{
                   width: 30,
                   height: 30,
-                  tintColor: focused ? '#ffffff' : '#ffe9a1',
+                  tintColor: focused ? '#000' : '#ffe9a1',
                 }}
               />
               <Text
-                style={{color: focused ? '#ffffff' : '#ffe9a1', fontSize: 12}}>
+                style={{color: focused ? '#000' : '#ffe9a1', fontSize: 12}}>
                 Schedule
               </Text>
             </View>

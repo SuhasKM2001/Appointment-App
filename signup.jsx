@@ -32,6 +32,7 @@ function SignupPage({navigation}) {
         setDoc(doc(db, 'Users', userCredential.user.uid), {
           Email: userdetail.email,
           Name: userdetail.name,
+          Id: userCredential.user.uid,
         });
         alert('User created successfully');
         navigation.navigate('userloginpage');

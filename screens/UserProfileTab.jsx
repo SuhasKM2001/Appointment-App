@@ -184,40 +184,6 @@ function UserProfileTab({navigation}) {
       </View>
       <View style={styles.buttonstyle}>
         <CustomButton buttonTitle="Sign Out" onPress={() => logout()} />
-        <CustomButton
-          buttonTitle="Edit Profile"
-          onPress={() => modalHandler()}
-        />
-        <Modal
-          visible={modal}
-          onRequestClose={() => modalHandler()}
-          animationType="fade"
-          transparent={true}>
-          <View style={styles.modalstyle}>
-            <View style={styles.modalbackground}>
-              <Entypo
-                size={35}
-                color={'black'}
-                name="cross"
-                onPress={() => modalHandler()}
-                style={styles.cross}
-              />
-              <CustomInput
-                placeholderText="Name"
-                autoCapitalize="none"
-                autoCorrect={false}
-                onChangeText={text => setUpdate({...update, Name: text})}
-                Icon={Ionicons}
-                Icontype="person-outline"
-                value={update}
-              />
-              <CustomButton
-                buttonTitle="Submit"
-                onPress={() => submitbutton()}
-              />
-            </View>
-          </View>
-        </Modal>
       </View>
     </View>
   );
