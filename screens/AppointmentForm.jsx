@@ -111,13 +111,8 @@ function AppointmentForm({ navigation}) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.text}>
-          Welcome Suhas
-          <Emoji name="coffee" style={{fontSize: 40}} />,
-        </Text>
         <Text style={styles.text1}>Schedule Appointment</Text>
         <View style={styles.inputcontainer}>
-          <Text style={styles.text}>Guest box</Text>
           <TextInput
             style={styles.textstyle}
             placeholder={'Title of meeting'}
@@ -214,6 +209,7 @@ const styles = StyleSheet.create({
     // marginTop: 80,
     marginLeft: 10,
     marginRight: 10,
+    paddingTop:20,
   },
   textstyle: {
     height: 40,
@@ -237,12 +233,13 @@ const styles = StyleSheet.create({
   },
   text1: {
     color: 'black',
-    fontSize: 20,
+    fontSize: 23,
     // lineHeight: 27,
-    marginTop: 80,
+    marginTop: 150,
     textAlign: 'center',
     fontFamily: 'serif',
     fontWeight: 'bold',
+    paddingBottom:20
   },
 
   headingtext: {

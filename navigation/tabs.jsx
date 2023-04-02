@@ -43,11 +43,6 @@ const Tabs = () => {
               </Text>
             </View>
           ),
-          // headerShown: true,
-          // headerStyle: {
-          //   backgroundColor: '#fcc100',
-          //   height: 80,
-          // },
           headerTintColor: '#ffffff',
           headerTitle: 'Nbyula',
           headerTitleStyle: {
@@ -55,7 +50,6 @@ const Tabs = () => {
             fontFamily: "serif",
             fontWeight: "bold",
             alignContent:'center',
-            //alignSelf:'center',
             textAlign:'center',
           },
           
@@ -74,11 +68,11 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? '#ffffff' : '#ffe9a1',
+                  tintColor: focused ? '#000' : '#ffe9a1',
                 }}
               />
               <Text
-                style={{color: focused ? '#ffffff' : '#ffe9a1', fontSize: 12}}>
+                style={{color: focused ? '#000' : '#ffe9a1', fontSize: 12}}>
                 Appointments
               </Text>
             </View>
@@ -99,11 +93,11 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                  tintColor: focused ? '#ffffff' : '#ffe9a1',
+                  tintColor: focused ? '#000' : '#ffe9a1',
                 }}
               />
               <Text
-                style={{color: focused ? '#ffffff' : '#ffe9a1', fontSize: 12}}>
+                style={{color: focused ? '#000' : '#ffe9a1', fontSize: 12}}>
                 Profile
               </Text>
             </View>

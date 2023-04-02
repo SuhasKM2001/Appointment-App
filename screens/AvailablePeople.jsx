@@ -9,16 +9,21 @@ import AppointmentForm from './AppointmentForm';
 import Emoji from 'react-native-emoji';
 
 function AvailablePeople({navigation}) {
-  const {user:loggedUser} = useSelector(state => state.useReducer);
+  const {user: loggedUser} = useSelector(state => state.useReducer);
   const [data, setdata] = useState([]);
-  useEffect(() => {console.log(data)}, [data]);
+
+  
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+
   useEffect(() => {
     ReadData();
   }, []);
 
   const ReadData = () => {
     const usersRef = collection(db, 'Users');
-
     onSnapshot(usersRef, querySnapshot => {
       const usersData = querySnapshot.docs.map(doc => ({
         ...doc.data(),
@@ -27,46 +32,51 @@ function AvailablePeople({navigation}) {
       setdata(usersData);
     });
   };
+
+
   return (
     <View style={styles.usercontainer}>
       <Text style={styles.text}>
-        Welcome Suhas
+       Welcome Suhas
         <Emoji name="coffee" style={{fontSize: 40}} />,
       </Text>
       <Text style={styles.text1}>Available for meeting</Text>
       <ScrollView
         contentContainerStyle={{alignItems: 'center'}}
         showsVerticalScrollIndicator={false}>
-         {data && data.map((user)=>{
-            return(
-                 (user.Id != loggedUser)  &&
-                <View style={styles.carddesign}>
-                <Image
-                  source={require('./card_avatar.jpg')}
-                  style={styles.cardimage}
-                  resizeMode="stretch"
-                />
-                <View style={styles.carddetails}>
-                  <Text style={styles.relativedetails}>{user.Name}</Text>
-                  <View style={styles.scheduledetails}>
-                   {user.Availability ?<Text style={styles.icontextdesign1}>Available</Text> : <Text style={styles.icontextdesign}>Not Available</Text>} 
-                   
-                  </View>
-                  <View>
-                    <CustomButton
-                      buttonTitle="Schedule Appointmnet"
-                      buttonStyle={{
-                        width: '60%',
-                      }}
-                      onPress={() => navigation.navigate(AppointmentForm)}
-                    />
+        {data &&
+          data.map((user, index) => {
+            return (
+              user.Id != loggedUser && (
+                <View style={styles.carddesign} key={index}>
+                  <Image
+                    source={require('./card_avatar.jpg')}
+                    style={styles.cardimage}
+                    resizeMode="stretch"
+                  />
+                  <View style={styles.carddetails}>
+                    <Text style={styles.relativedetails}>{user.Name}</Text>
+                    <View style={styles.scheduledetails}>
+                      {user.Availability ? (
+                        <Text style={styles.icontextdesign1}>Available</Text>
+                      ) : (
+                        <Text style={styles.icontextdesign}>Not Available</Text>
+                      )}
+                    </View>
+                    <View>
+                      <CustomButton
+                        buttonTitle="Schedule Appointmnet"
+                        buttonStyle={{
+                          width: '60%',
+                        }}
+                        onPress={() => navigation.navigate(AppointmentForm)}
+                      />
+                    </View>
                   </View>
                 </View>
-              </View>
-            
-            )
-         })}   
-  
+              )
+            );
+          })}
       </ScrollView>
     </View>
   );
@@ -140,14 +150,14 @@ const styles = StyleSheet.create({
   icontextdesign: {
     fontSize: 14,
     fontFamily: 'serif',
-    color:'#FF0000'
+    color: '#FF0000',
   },
   icontextdesign1: {
     fontSize: 14,
     fontFamily: 'serif',
-    color:'#006a4e'
+    color: '#006a4e',
   },
-  
+
   buttonContainer: {
     marginTop: 10,
     width: '70%',
