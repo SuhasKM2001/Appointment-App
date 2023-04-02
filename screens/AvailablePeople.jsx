@@ -37,7 +37,7 @@ function AvailablePeople({navigation}) {
   return (
     <View style={styles.usercontainer}>
       <Text style={styles.text}>
-       Welcome Suhas
+       Welcome
         <Emoji name="coffee" style={{fontSize: 40}} />,
       </Text>
       <Text style={styles.text1}>Available for meeting</Text>
@@ -64,13 +64,21 @@ function AvailablePeople({navigation}) {
                       )}
                     </View>
                     <View>
-                      <CustomButton
+                      {user.Availability ? ( <CustomButton
                         buttonTitle="Schedule Appointmnet"
                         buttonStyle={{
                           width: '60%',
                         }}
                         onPress={() => navigation.navigate(AppointmentForm)}
+                      />): (
+                        <CustomButton
+                        buttonTitle="Can't Schedule"
+                        buttonStyle={{
+                          width: '60%',
+                        }}
                       />
+                      )}
+                     
                     </View>
                   </View>
                 </View>
