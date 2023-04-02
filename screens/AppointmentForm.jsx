@@ -1,6 +1,14 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {auth, db, storage} from '../config';
-import {collection, addDoc} from 'firebase/firestore';
+import {
+  collection,
+  addDoc,
+  doc,
+  getDoc,
+  updateDoc,
+  onSnapshot,
+  QuerySnapshot,
+} from 'firebase/firestore';
 import {
   View,
   Text,
@@ -11,14 +19,13 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import Emoji from 'react-native-emoji';
 import CustomButton from '../CustomButton';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import {useSelector} from 'react-redux';
 import moment from 'moment';
 
-function AppointmentForm({ navigation}) {
-  // const {user} = useSelector(state => state.useReducer);
-  const [guest, setGuest] = useState('');
+function AppointmentForm({route}) {
+  const {user} = useSelector(state => state.useReducer);
   const [title, setTitle] = useState('');
   const [agenda, setAgenda] = useState('');
   const [date, setDate] = useState(new Date());
@@ -28,25 +35,29 @@ function AppointmentForm({ navigation}) {
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
   const [displayDate, setDisplayDate] = useState('');
   const [displayTime, setDisplayTime] = useState('');
-  const isMountDate=useRef(false);
+  const [loggedInName, setLoggedInName] = useState([]);
+  const isMountDate = useRef(false);
   const isMountTime = useRef(false);
+  const user_id = route.params.userID;
+  const [guest, setGuest] = useState(route.params.userName);
 
-  
   // const {id} = route.params;
 
   useEffect(() => {
-    if(isMountDate.current)
-    {
-    setDisplayDate(date.toISOString().split('T')[0]);
+    if (isMountDate.current) {
+      setDisplayDate(date.toISOString().split('T')[0]);
     }
-    isMountDate.current=true;
+    isMountDate.current = true;
   }, [date]);
 
   useEffect(() => {
-    if(isMountTime.current)
-    setDisplayTime(moment(time).format('kk:mm'));
-    isMountTime.current=true;
+    if (isMountTime.current) setDisplayTime(moment(time).format('kk:mm'));
+    isMountTime.current = true;
   }, [time]);
+
+  useEffect(() => {
+    UserLoggedData();
+  }, []);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -54,11 +65,6 @@ function AppointmentForm({ navigation}) {
   const showTimePicker = () => {
     setTimePickerVisibility(true);
   };
-
-  // const handleConfirm= value =>{
-  //   setDate(date);
-  //   hideDatePicker();
-  // }
 
   const onChangeDatefunc = (event, selectedDate) => {
     setDatePickerVisibility(false);
@@ -81,21 +87,48 @@ function AppointmentForm({ navigation}) {
     setTime(selectedTime);
   };
 
+  const UserLoggedData = async () => {
+    try {
+      const UserRef = doc(db, 'Users', user);
+      onSnapshot(UserRef, doc => {
+        setLoggedInName(doc.data());
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const senddata = async () => {
     setShowloader(true);
-    const appointmentRef = collection(
-      db,
-      'Users',
-      'PpkWFzd2LKZcmDPRHAcqF4ecHTF3',
-      'AppointmentList',
-    );
-    addDoc(appointmentRef, {
+    const guestRef = collection(db, 'Users', user, 'AppointmentList');
+    addDoc(guestRef, {
       Guest: guest,
       Title: title,
       Agenda: agenda,
       Datefield: displayDate,
       Time: displayTime,
     }).then(() => {
+      setGuest('');
+      setTitle('');
+      setAgenda('');
+      setDisplayDate('');
+      setDisplayTime('');
+      setShowloader(false);
+      ToastAndroid.show(
+        'Appointment Scheduled',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
+    });
+    const appointmentRef = collection(db, 'Users', user_id, 'AppointmentList');
+    addDoc(appointmentRef, {
+      Guest: loggedInName.Name,
+      Title: title,
+      Agenda: agenda,
+      Datefield: displayDate,
+      Time: displayTime,
+    }).then(() => {
+      setLoggedInName('');
       setTitle('');
       setAgenda('');
       setDisplayDate('');
@@ -108,6 +141,7 @@ function AppointmentForm({ navigation}) {
       );
     });
   };
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.container}>
@@ -209,7 +243,7 @@ const styles = StyleSheet.create({
     // marginTop: 80,
     marginLeft: 10,
     marginRight: 10,
-    paddingTop:20,
+    paddingTop: 20,
   },
   textstyle: {
     height: 40,
@@ -239,7 +273,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'serif',
     fontWeight: 'bold',
-    paddingBottom:20
+    paddingBottom: 20,
   },
 
   headingtext: {

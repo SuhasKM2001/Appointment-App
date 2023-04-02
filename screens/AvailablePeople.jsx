@@ -64,18 +64,12 @@ function AvailablePeople({navigation}) {
                       )}
                     </View>
                     <View>
-                      {user.Availability ? ( <CustomButton
+                      {user.Availability && ( <CustomButton
                         buttonTitle="Schedule Appointmnet"
                         buttonStyle={{
                           width: '60%',
                         }}
-                        onPress={() => navigation.navigate(AppointmentForm)}
-                      />): (
-                        <CustomButton
-                        buttonTitle="Can't Schedule"
-                        buttonStyle={{
-                          width: '60%',
-                        }}
+                        onPress={() => navigation.navigate('AppointmentForm', {userID:user.Id, userName:user.Name})}
                       />
                       )}
                      

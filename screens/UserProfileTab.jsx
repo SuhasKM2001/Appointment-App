@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
     borderRadius: 10,
     backgroundColor: '#ddd',
-    padding: 50,
+    margin: 40,
+    padding:15
   },
   buttonstyle: {
     // flex: 1.5,
